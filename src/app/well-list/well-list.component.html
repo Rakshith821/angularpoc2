@@ -1,0 +1,35 @@
+<app-well [newSourceKey]="currentSourceKey" (emitterOutput)="addWell($event)"></app-well>
+<div style="margin-bottom: 10px">
+  <h3>Select a source key</h3>
+  <mat-chip-list aria-label="Fish selection">
+    <mat-chip color="primary" selected (click)="currentSourceKey = 'SK100'">SK100</mat-chip>
+    <mat-chip color="primary" selected (click)="currentSourceKey = 'SK101'">SK101</mat-chip>
+    <mat-chip color="primary" selected (click)="currentSourceKey = 'SK102'">SK102</mat-chip>
+    <mat-chip color="primary" selected (click)="currentSourceKey = 'SK103'">SK103</mat-chip>
+  </mat-chip-list>
+</div>
+
+<h3>Well list</h3>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Name</th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="type">
+    <th mat-header-cell *matHeaderCellDef> Type </th>
+    <td mat-cell *matCellDef="let element"
+      [ngStyle]="{'background': element.type === 'green' ? 'green' : element.type === 'red' ? 'red' : element.type === 'blue' ? 'blue' : 'white'}">
+      {{element.type}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="sourceKey">
+    <th mat-header-cell *matHeaderCellDef> Source Key </th>
+    <td mat-cell *matCellDef="let element"> {{element.sourceKey}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

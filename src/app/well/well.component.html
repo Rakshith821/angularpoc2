@@ -1,0 +1,33 @@
+<div class="login-form">
+  <div class="title">
+    <h3>Add Well</h3>
+  </div>
+  <form [formGroup]="wellForm" (ngSubmit)="add()">
+    <mat-form-field class="w-full" appearance="outline">
+      <mat-label>Name</mat-label>
+      <input matInput type="email" formControlName="nameControl" [(ngModel)]="wellObj.name" />
+      <mat-error *ngIf="wellForm.controls['nameControl'].errors?.required">
+        Email is Required
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="w-full" appearance="outline">
+      <mat-label>Type</mat-label>
+      <mat-select [(ngModel)]="wellObj.type" formControlName="typeControl">
+        <mat-option *ngFor="let type of types" [value]="type">
+          {{type}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="wellForm.controls['typeControl'].errors?.required">
+        Type is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="w-full" appearance="outline">
+      <mat-label>Source Key</mat-label>
+      <input matInput  formControlName="sourceKeyControl" [(ngModel)]="wellObj.sourceKey" readonly />
+      <mat-error *ngIf="wellForm.controls['sourceKeyControl'].errors?.required">
+        Please click on a sourceKey from below
+      </mat-error>
+    </mat-form-field>
+    <button class="btn btn-login">Add</button>
+  </form>
+</div>
